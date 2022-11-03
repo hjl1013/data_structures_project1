@@ -55,6 +55,10 @@ T Queue<T>::dequeue(){
 
 template <typename T>
 bool Queue<T>::isFull(){
-    //TODO
-    return true;
+    if (!empty && (rear + 1) % size == front){
+	return true;
+    }
+    else{
+	return false;
+    }
 }
