@@ -40,7 +40,7 @@ void Queue<T>::enqueue(const T& value, int priority){
         empty = false;
     }
     if (isFull()) {
-        new_array = new Item<T>[size * 2];
+        Item<T> *new_array = new Item<T>[size * 2];
         for (int i = 0; i < size; i++) {
             new_array[i] = array[(front + i) % size];
         }
@@ -50,7 +50,8 @@ void Queue<T>::enqueue(const T& value, int priority){
         size *= 2;
     }
     rear = (rear + 1) % size;
-    array[rear] = Item<T>(value, priority); //조금 애매한데 오류나면 한 번 확인해보기
+    array[rear].value = value;
+    array[rear].priority = priority;//조금 애매한데 오류나면 한 번 확인해보기
     return;
 }
 
@@ -65,7 +66,7 @@ int Queue<T>::top(){
         }
     }
 
-    return i;
+    return max_idx;
 }
 
 template <typename T>
