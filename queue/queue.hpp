@@ -36,7 +36,21 @@ class Queue{
 
 template <typename T>
 void Queue<T>::enqueue(const T& value, int priority){
-    //TODO
+    if (empty) {
+        empty = false;
+    }
+    if (isFull()) {
+        new_array = new Item<T>[size * 2];
+        for (int i = 0; i < size; i++) {
+            new_array[i] = array[(front + i) % size];
+        }
+        array = new_array;
+        front = 0;
+        rear = size - 1;
+        size *= 2;
+    }
+    rear = (rear + 1) % size;
+    array[rear] = Item<T>(value, priority); //조금 애매한데 오류나면 한 번 확인해보기
     return;
 }
 
@@ -44,21 +58,39 @@ template <typename T>
 int Queue<T>::top(){
     //TODO
     //returning the array index of the highest priority item
-    return NULL;
+    int max_idx = front;
+    for (int i = (front + i) % size; i != (rear + 1) % size; i = (i + 1) % size) {
+        if (array[max_idx].priority < array[i].priority) {
+            max_idx = i;
+        }
+    }
+
+    return i;
 }
 
 template <typename T>
 T Queue<T>::dequeue(){
+    //empty 잘 관리해주기
     //TODO
-    return NULL;
+    int max_idx = top();
+    T max_val = array[max_idx].value;
+    for (int i = max_idx; i != front; i = (i + size - 1) % size) {
+        array[i] = array[(i + size - 1) % size];
+    }
+
+    if (front == rear) {
+        empty = true;
+    }
+    front = (front + 1) % size;
+    return max_val;
 }
 
 template <typename T>
 bool Queue<T>::isFull(){
     if (!empty && (rear + 1) % size == front){
-	return true;
+	    return true;
     }
     else{
-	return false;
+	    return false;
     }
 }
