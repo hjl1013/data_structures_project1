@@ -58,6 +58,7 @@ void Stack<T>::push(const T& item){
 	    for (int i = 0; i < size; i++){
 		    new_array[i] = array[i];
 	    }
+	    delete[] array;
 	    array = new_array;
 	    size *= 2;
     }

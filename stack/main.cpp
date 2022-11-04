@@ -34,10 +34,12 @@ int main() {
 	
     // My Code
     cout << checkParentheses("(3(567()))", v) << endl;
+    cout << checkParentheses("(3)))))", v) << endl;
     cout << calculate("1+2*3") << endl;
     cout << calculate("+1*(2+3)") << endl;
     cout << calculate("-2+(-3-2*4)*3") << endl;
-
+    cout << calculate(".9+(.8-1)*2") << endl;
+    cout << calculate("9.+2*(.7-0.1)") << endl;
     cout << calculate("12.345-10*(1-2)") << endl;
 
     return 0;
