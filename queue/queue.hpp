@@ -60,7 +60,7 @@ int Queue<T>::top(){
     //TODO
     //returning the array index of the highest priority item
     int max_idx = front;
-    for (int i = (front + i) % size; i != (rear + 1) % size; i = (i + 1) % size) {
+    for (int i = (front + 1) % size; i != (rear + 1) % size; i = (i + 1) % size) {
         if (array[max_idx].priority < array[i].priority) {
             max_idx = i;
         }
