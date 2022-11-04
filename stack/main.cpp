@@ -38,6 +38,8 @@ int main() {
     cout << calculate("+1*(2+3)") << endl;
     cout << calculate("-2+(-3-2*4)*3") << endl;
 
+    cout << calculate("12.345-10*(1-2)") << endl;
+
     return 0;
 
 }
