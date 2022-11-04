@@ -36,9 +36,6 @@ class Queue{
 
 template <typename T>
 void Queue<T>::enqueue(const T& value, int priority){
-    if (empty) {
-        empty = false;
-    }
     if (isFull()) {
         Item<T> *new_array = new Item<T>[size * 2];
         for (int i = 0; i < size; i++) {
@@ -51,7 +48,15 @@ void Queue<T>::enqueue(const T& value, int priority){
     }
     rear = (rear + 1) % size;
     array[rear].value = value;
-    array[rear].priority = priority;//조금 애매한데 오류나면 한 번 확인해보기
+    array[rear].priority = priority;
+    
+    if (empty) empty = false;
+    /*
+    for (int i = 0; i < size; i++){
+	    std::cout << array[i].value << " ";
+    }
+    std::cout << std::endl
+    */;
     return;
 }
 
@@ -83,6 +88,12 @@ T Queue<T>::dequeue(){
         empty = true;
     }
     front = (front + 1) % size;
+    /*
+    for (int i = 0; i < size; i++) {
+	    std::cout << array[i].value << " ";
+    }
+    std::cout << std::endl
+    */;
     return max_val;
 }
 
