@@ -33,25 +33,21 @@ class Stack{
 
 template <typename T>
 bool Stack<T>::isEmpty() const{
-    //TODO
     return current == -1;
 }
 
 template <typename T>
 bool Stack<T>::isFull() const{
-    //TODO
     return current == size - 1;
 }
 
 template <typename T>
 T Stack<T>::top() const{
-    //TODO
     return array[current];
 }
 
 template <typename T>
 T Stack<T>::pop(){
-    //TODO
     return array[current--];
 }
 
@@ -71,3 +67,4 @@ void Stack<T>::push(const T& item){
 
 bool checkParentheses(const string& line, const vector<pair<char,char>>& pairs);
 float calculate(const string& line);
+float operate(float a, float b, char op);
