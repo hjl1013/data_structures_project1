@@ -31,6 +31,12 @@ int main() {
 
     string a = "(3))";
     cout<<checkParentheses(a, v)<<endl;
+	
+    // My Code
+    cout << checkParentheses("(3(567()))", v) << endl;
+    cout << calculate("1+2*3") << endl;
+    cout << calculate("+1*(2+3)") << endl;
+    cout << calculate("-2+(-3-2*4)*3") << endl;
 
     return 0;
 

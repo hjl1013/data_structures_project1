@@ -9,14 +9,14 @@ using namespace std;
 bool checkParentheses(const string& line, const vector<pair<char,char>>& pairs){
     //TODO
     Stack<char> parentheses;
-    for (int i = 0; i < line.length; i++) {
+    for (int i = 0; i < line.length(); i++) {
         for (auto pair : pairs) {
-            if (line[i] == pair[0]) {
+            if (line[i] == pair.first) {
                 parentheses.push(line[i]);
                 break;
             }
-            else if (line[i] == pair[1]) {
-                if (parentheses.pop() == pair[0]) {
+            else if (line[i] == pair.second) {
+                if (parentheses.pop() == pair.first) {
                     break;
                 }
                 else {
@@ -38,14 +38,14 @@ float calculate(const string& line){
     Stack<float> numbers;
     Stack<char> operators;
 
-    for (int i = 0; i < line.length; i++) {
+    for (int i = 0; i < line.length(); i++) {
         if (line[i] == '+' || line[i] == '-') {
             if (i == 0 || line[i - 1] == '(') {
                 numbers.push(0);
             }
-            while (!operators.isEmpty() || operators.top() != '(') {
-                b = numbers.pop();
-                a = numbers.pop();
+            while (!operators.isEmpty() && operators.top() != '(') {
+                float b = numbers.pop();
+                float a = numbers.pop();
                 numbers.push(operate(a, b, operators.pop()));
             }
             operators.push(line[i]);
@@ -55,16 +55,23 @@ float calculate(const string& line){
         }
         else if (line[i] == ')') {
             while (operators.top() != '(') {
-                b = numbers.pop();
-                a = numbers.pop();
+                float b = numbers.pop();
+                float a = numbers.pop();
                 numbers.push(operate(a, b, operators.pop()));
             }
             operators.pop();
         }
         else {
-            numbers.push(line[i]);
+            numbers.push(line[i] - '0');
         }
     }
+    
+    while(!operators.isEmpty()){
+	    float b = numbers.pop();
+	    float a = numbers.pop();
+	    numbers.push(operate(a, b, operators.pop()));
+    }
+
     return numbers.top();
 }
 
