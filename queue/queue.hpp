@@ -41,6 +41,7 @@ void Queue<T>::enqueue(const T& value, int priority){
         for (int i = 0; i < size; i++) {
             new_array[i] = array[(front + i) % size];
         }
+	delete[] array;
         array = new_array;
         front = 0;
         rear = size - 1;

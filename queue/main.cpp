@@ -20,6 +20,7 @@ int main() {
 
     q.enqueue(1,2);
     q.enqueue(2,3);
+    q.enqueue(4,4);
 
     cout<<q.isFull()<<endl;
     cout<<q.top()<<endl;

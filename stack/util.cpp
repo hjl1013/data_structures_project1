@@ -16,7 +16,7 @@ bool checkParentheses(const string& line, const vector<pair<char,char>>& pairs){
                 break;
             }
             else if (line[i] == pair.second) {
-                if (parentheses.pop() == pair.first) {
+                if (!parentheses.isEmpty() && parentheses.pop() == pair.first) {
                     break;
                 }
                 else {
@@ -62,28 +62,27 @@ float calculate(const string& line){
             operators.pop();
         }
         else {
-            numbers.push(line[i] - '0');
-
             float factor = 1;
             bool decimal = false;
-            while (i + 1 < line.length()) {
-                if ('0' <= line[i + 1] <= '9') {
+	    numbers.push(0);
+            while (true) {
+                if ('0' <= line[i] && line[i] <= '9') {
                     if (!decimal) {
-                        numbers.push(numbers.pop() * 10 + line[i + 1] - '0');
+                        numbers.push(numbers.pop() * 10 + line[i] - '0');
                     }
                     else {
                         factor /= 10;
-                        numbers.push(numbers.pop() + (line[i + 1] - '0') * factor);
+                        numbers.push(numbers.pop() + (line[i] - '0') * factor);
                     }
-                    i++;
                 }
-                else if (line[i + 1] == '.') {
+                else if (line[i] == '.') {
                     decimal = true;
-                    i++;
                 }
                 else {
+		    i--;
                     break;
                 }
+		i++;
             }
         }
     }
